@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const squares = document.querySelectorAll("#board div");
     const status = document.getElementById("status");
+    const newGameButton = document.querySelector(".btn");
+
+    // Remember the original message so we can restore it
+    const originalMessage = status.textContent;
 
     //  X goes first.
     let currentPlayer = "X";
@@ -32,24 +36,22 @@ document.addEventListener("DOMContentLoaded", function () {
         // style each square
         square.classList.add("square");
 
-        //  handle clicks
+        // handle clicks
         square.addEventListener("click", function () {
             square.textContent = currentPlayer;
             square.classList.add(currentPlayer);
             gameState[index] = currentPlayer;
 
-            //  check for a winner
             const winner = checkWinner();
             if (winner) {
                 status.textContent = "Congratulations! " + winner + " is the Winner!";
                 status.classList.add("you-won");
             }
 
-            // Switch turns
             currentPlayer = currentPlayer === "X" ? "O" : "X";
         });
 
-        //  hover effect
+        // hover effect
         square.addEventListener("mouseenter", function () {
             square.classList.add("hover");
         });
@@ -57,5 +59,18 @@ document.addEventListener("DOMContentLoaded", function () {
         square.addEventListener("mouseleave", function () {
             square.classList.remove("hover");
         });
+    });
+
+    //restart the game
+    newGameButton.addEventListener("click", function () {
+        squares.forEach(function (square, index) {
+            square.textContent = "";
+            square.classList.remove("X", "O");
+            gameState[index] = "";
+        });
+
+        currentPlayer = "X";
+        status.textContent = originalMessage;
+        status.classList.remove("you-won");
     });
 });
