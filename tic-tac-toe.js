@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
     const squares = document.querySelectorAll("#board div");
 
-    // X goes first
+    // Whose turn is it? X goes first.
     let currentPlayer = "X";
 
     // Nine empty slots, one per square
     const gameState = ["", "", "", "", "", "", "", "", ""];
 
     squares.forEach(function (square, index) {
-        // Exercise 1: style each square
+        // style each square
         square.classList.add("square");
 
-        // Exercise 2: handle clicks
+        //  handle clicks
         square.addEventListener("click", function () {
             square.textContent = currentPlayer;
             square.classList.add(currentPlayer);
@@ -19,6 +19,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Switch turns
             currentPlayer = currentPlayer === "X" ? "O" : "X";
+        });
+
+        // hover effect
+        square.addEventListener("mouseenter", function () {
+            square.classList.add("hover");
+        });
+
+        square.addEventListener("mouseleave", function () {
+            square.classList.remove("hover");
         });
     });
 });
