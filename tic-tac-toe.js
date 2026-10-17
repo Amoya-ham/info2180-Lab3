@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Remember the original message so we can restore it
     const originalMessage = status.textContent;
 
-    //  X goes first.
+    // X goes first.
     let currentPlayer = "X";
 
     // Nine empty slots, one per square
@@ -33,11 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     squares.forEach(function (square, index) {
-        // style each square
+        //  style each square
         square.classList.add("square");
 
         // handle clicks
         square.addEventListener("click", function () {
+            //  ignore clicks on filled squares
+            if (gameState[index] !== "") {
+                return;
+            }
+
             square.textContent = currentPlayer;
             square.classList.add(currentPlayer);
             gameState[index] = currentPlayer;
@@ -61,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    //restart the game
+    //  restart the game
     newGameButton.addEventListener("click", function () {
         squares.forEach(function (square, index) {
             square.textContent = "";
