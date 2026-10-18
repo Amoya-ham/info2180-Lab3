@@ -1,3 +1,3 @@
-# Info2180-Lab3
+# Info2180  Lab3
 
-This is lab 3 for Amoy Hamilton
+This is lab 3 for Amoya Hamilton
